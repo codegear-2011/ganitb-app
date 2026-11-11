@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f9ff">
+  <script>
+    // সংরক্ষিত Dark mode পেজ আঁকার আগেই চালু হয়, যাতে সাদা ঝলক না দেখা যায়
+    try {
+      if (localStorage.getItem('ganitBondhuTheme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e1726');
+      }
+    } catch (e) {}
+  </script>
+  <title>অধ্যায় নির্বাচন — গণিত বন্ধু</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            bengali: ['Tiro Bangla', 'serif'],
+            english: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: "Tiro Bangla", serif; }
+    .app-shell { max-width: 520px; }
+
+    .chapter-card { transition: transform .2s ease, box-shadow .2s ease; }
+    .chapter-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(30, 64, 110, .09); }
+    .chapter-card:active { transform: scale(.985); }
+
+    button:focus-visible, input:focus-visible {
+      outline: 3px solid #3989e9;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+  <script defer src="../assets/menu.js"></script>
+</head>
+
+<body class="min-h-screen bg-[#fbfcff] text-[#123d7d]">
+
+  <main class="app-shell relative mx-auto min-h-screen bg-[#f7faff] px-4 pb-10 shadow-[0_0_55px_rgba(36,69,112,0.05)] sm:px-5">
+
+    <!-- ===== Header ===== -->
+    <header class="flex items-center gap-3 pt-6">
+      <button type="button" onclick="history.back()" aria-label="পেছনে যান"
+        class="h-10 w-8 shrink-0 text-[#1554a4] transition hover:text-blue-600">
+        <i class="fa-solid fa-arrow-left text-[24px]"></i>
+      </button>
+
+      <img
+        src="https://www.appcreator24.com/srv/imgs/gen/4227302_icohome.png?ts=1792924059"
+        alt="গণিত বন্ধু অ্যাপ আইকন"
+        class="h-[60px] w-[60px] shrink-0 rounded-[18px] object-cover shadow-sm">
+
+      <div class="min-w-0 flex-1">
+        <h1 class="text-[24px] leading-tight text-[#1554a4]">গণিত বন্ধু</h1>
+        <p class="font-english text-[12px] leading-snug text-[#637895]">WBBSE Math Solutions</p>
+      </div>
+
+      <button type="button" aria-label="বুকমার্ক" class="h-10 w-9 shrink-0 text-[#234a80] transition hover:text-blue-600">
+        <i class="fa-regular fa-bookmark text-[22px]"></i>
+      </button>
+      <div id="menu-root" class="relative shrink-0">
+        <button type="button" id="menu-btn" aria-label="মেনু" aria-haspopup="menu" aria-expanded="false" aria-controls="gb-menu"
+          class="h-10 w-7 text-[#234a80] transition hover:text-blue-600">
+          <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== Banner ===== -->
+    <section class="relative mt-5 overflow-hidden rounded-[22px] bg-gradient-to-br from-[#e9f2ff] to-[#dfeafc] p-5">
+
+      <div class="relative z-10 max-w-[62%]">
+        <span class="inline-flex items-center gap-2 rounded-full bg-[#1565c9] px-4 py-1.5 font-english text-[15px] font-medium text-white">
+          <i class="fa-solid fa-graduation-cap text-[15px]"></i>
+          Class <span id="class-number">9</span>
+        </span>
+
+        <h2 class="mt-4 text-[30px] leading-tight text-[#0f3d8a]">অধ্যায় নির্বাচন</h2>
+        <p class="mt-2 text-[15px] leading-[1.6] text-[#637895]">
+          নিচের তালিকা থেকে আপনার পছন্দের অধ্যায়টি নির্বাচন করুন।
+        </p>
+      </div>
+
+      <!-- Decorations -->
+      <span class="absolute right-6 top-3 -rotate-12 font-english text-[17px] italic text-[#a9c8f5]">a² + b² = c²</span>
+      <i class="fa-solid fa-play absolute right-4 top-[62px] -rotate-90 text-[34px] text-[#c4dafa] opacity-70"></i>
+      <i class="fa-solid fa-leaf absolute bottom-6 right-[44%] text-[22px] text-[#bcd5f7]"></i>
+      <i class="fa-solid fa-leaf absolute bottom-6 right-3 text-[22px] text-[#bcd5f7]"></i>
+
+      <!-- Books illustration -->
+      <svg class="absolute bottom-2 right-3 h-[125px] w-[170px]" viewBox="0 0 200 150" aria-hidden="true">
+        <g transform="translate(0 14) skewY(-6)">
+          <!-- yellow book -->
+          <rect x="22" y="108" width="150" height="18" rx="4" fill="#ffb92e"/>
+          <rect x="30" y="126" width="142" height="9" rx="2" fill="#ffffff" stroke="#f2d28b" stroke-width="2"/>
+          <!-- blue book -->
+          <rect x="34" y="80" width="136" height="18" rx="4" fill="#0f5ec9"/>
+          <rect x="42" y="98" width="128" height="9" rx="2" fill="#ffffff" stroke="#c7dcf7" stroke-width="2"/>
+          <!-- pencils -->
+          <line x1="98" y1="46" x2="94" y2="14" stroke="#ffb92e" stroke-width="9" stroke-linecap="round"/>
+          <line x1="118" y1="46" x2="126" y2="14" stroke="#1565c9" stroke-width="9" stroke-linecap="round"/>
+          <!-- cup -->
+          <path d="M86 44 H134 L130 80 H90 Z" fill="#0b428b"/>
+          <rect x="82" y="40" width="56" height="9" rx="3" fill="#0b428b"/>
+        </g>
+      </svg>
+    </section>
+
+    <!-- ===== Search ===== -->
+    <div class="relative mt-5">
+      <label for="chapter-search" class="sr-only">অধ্যায় খুঁজুন</label>
+      <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[19px] text-[#5d6f8c]"></i>
+      <input id="chapter-search" type="search" autocomplete="off" placeholder="অধ্যায় খুঁজুন..."
+        class="h-[54px] w-full rounded-full border-2 border-[#e1ebf9] bg-[#f1f6fe] pl-14 pr-5 text-[17px] text-[#123d7d] placeholder:text-[#8a9bb4]">
+    </div>
+
+    <!-- ===== Chapter list ===== -->
+    <section id="chapter-list" aria-label="অধ্যায় তালিকা" class="mt-5 space-y-3"></section>
+
+    <p id="toast" role="status" class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-[#123d7d] px-5 py-3 text-[15px] text-white shadow-lg"></p>
+
+    <p id="empty-message" class="hidden py-10 text-center text-[17px] text-[#637895]">কোনো অধ্যায় পাওয়া যায়নি।</p>
+
+  </main>
+
+  <script>
+    // শ্রেণী: ফোল্ডারের নাম থেকে নেয় (9/chapter.html → 9); না পেলে আগে বেছে নেওয়া মান, তাও না থাকলে ৯
+    let savedClass = '9';
+    const folderMatch = location.pathname.match(/\/(\d+)\/[^\/]*$/);
+    if (folderMatch) {
+      savedClass = folderMatch[1];
+    } else {
+      try {
+        savedClass = localStorage.getItem('ganitBondhuSelectedClass') || '9';
+      } catch (e) {}
+    }
+    document.getElementById('class-number').textContent = savedClass;
+
+    // রঙের সেট
+    const colors = {
+      blue:   { bg: 'bg-[#dbeafe]', text: 'text-[#1765c4]' },
+      green:  { bg: 'bg-[#d6f5e4]', text: 'text-[#168357]' },
+      purple: { bg: 'bg-[#e9e2ff]', text: 'text-[#6242c5]' },
+      orange: { bg: 'bg-[#ffe6c4]', text: 'text-[#c76a0a]' },
+      teal:   { bg: 'bg-[#cdf3f3]', text: 'text-[#0a8a94]' },
+      pink:   { bg: 'bg-[#ffdce3]', text: 'text-[#cf2d52]' }
+    };
+
+    // অধ্যায়ের তালিকা
+    // json: '' ফাঁকা রাখলে নিজে থেকে data/1.1.json (কষে দেখি 1.1), data/2.json (কষে দেখি 2) ফাইল খোঁজে।
+    // অন্য নাম বা ফোল্ডার দিতে চাইলে লিখুন, যেমন  json: 'data/ch1/ex1.json'
+    const chapters = [
+      { no: 1, ex: '1.1', title: 'বাস্তব সংখ্যা (কষে দেখি 1.1)', desc: 'বাস্তব সংখ্যা অধ্যায়ের কষে দেখি ১.১ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 1, ex: '1.2', title: 'বাস্তব সংখ্যা (কষে দেখি 1.2)', desc: 'বাস্তব সংখ্যা অধ্যায়ের কষে দেখি ১.২ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 1, ex: '1.3', title: 'বাস্তব সংখ্যা (কষে দেখি 1.3)', desc: 'বাস্তব সংখ্যা অধ্যায়ের কষে দেখি ১.৩ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 2, ex: '2', title: 'সূচকের নিয়মাবলি (কষে দেখি 2)', desc: 'সূচকের নিয়মাবলি অধ্যায়ের কষে দেখি ২ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 3, ex: '3.1', title: 'লেখচিত্র (কষে দেখি 3.1)', desc: 'লেখচিত্র অধ্যায়ের কষে দেখি ৩.১ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' },
+      { no: 3, ex: '3.2', title: 'লেখচিত্র (কষে দেখি 3.2)', desc: 'লেখচিত্র অধ্যায়ের কষে দেখি ৩.২ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' },
+      { no: 4, ex: '4', title: 'স্থানাঙ্ক জ্যামিতি : দূরত্ব নির্ণয় (কষে দেখি 4)', desc: 'স্থানাঙ্ক জ্যামিতি : দূরত্ব নির্ণয় অধ্যায়ের কষে দেখি ৪ এর সমস্ত উত্তর এখানে', json: '', color: 'orange' },
+      { no: 5, ex: '5.1', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.1)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.১ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 5, ex: '5.2', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.2)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.২ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 5, ex: '5.3', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.3)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.৩ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 5, ex: '5.4', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.4)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.৪ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 5, ex: '5.5', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.5)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.৫ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 5, ex: '5.6', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.6)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.৬ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 5, ex: '5.7', title: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) (কষে দেখি 5.7)', desc: 'রৈখিক সহ সমীকরণ (দুই চল বিশিষ্ট) অধ্যায়ের কষে দেখি ৫.৭ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 6, ex: '6', title: 'সামান্তরিকের ধর্ম (কষে দেখি 6)', desc: 'সামান্তরিকের ধর্ম অধ্যায়ের কষে দেখি ৬ এর সমস্ত উত্তর এখানে', json: '', color: 'pink' },
+      { no: 7, ex: '7.1', title: 'বহুপদী সংখ্যামালা (কষে দেখি 7.1)', desc: 'বহুপদী সংখ্যামালা অধ্যায়ের কষে দেখি ৭.১ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 7, ex: '7.2', title: 'বহুপদী সংখ্যামালা (কষে দেখি 7.2)', desc: 'বহুপদী সংখ্যামালা অধ্যায়ের কষে দেখি ৭.২ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 7, ex: '7.3', title: 'বহুপদী সংখ্যামালা (কষে দেখি 7.3)', desc: 'বহুপদী সংখ্যামালা অধ্যায়ের কষে দেখি ৭.৩ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 7, ex: '7.4', title: 'বহুপদী সংখ্যামালা (কষে দেখি 7.4)', desc: 'বহুপদী সংখ্যামালা অধ্যায়ের কষে দেখি ৭.৪ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 8, ex: '8.1', title: 'উৎপাদকে বিশ্লেষণ (কষে দেখি 8.1)', desc: 'উৎপাদকে বিশ্লেষণ অধ্যায়ের কষে দেখি ৮.১ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 8, ex: '8.2', title: 'উৎপাদকে বিশ্লেষণ (কষে দেখি 8.2)', desc: 'উৎপাদকে বিশ্লেষণ অধ্যায়ের কষে দেখি ৮.২ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 8, ex: '8.3', title: 'উৎপাদকে বিশ্লেষণ (কষে দেখি 8.3)', desc: 'উৎপাদকে বিশ্লেষণ অধ্যায়ের কষে দেখি ৮.৩ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 8, ex: '8.4', title: 'উৎপাদকে বিশ্লেষণ (কষে দেখি 8.4)', desc: 'উৎপাদকে বিশ্লেষণ অধ্যায়ের কষে দেখি ৮.৪ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 8, ex: '8.5', title: 'উৎপাদকে বিশ্লেষণ (কষে দেখি 8.5)', desc: 'উৎপাদকে বিশ্লেষণ অধ্যায়ের কষে দেখি ৮.৫ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 9, ex: '9', title: 'ভেদক ও মধ্যবিন্দু সংক্রান্ত উপপাদ্য (কষে দেখি 9)', desc: 'ভেদক ও মধ্যবিন্দু সংক্রান্ত উপপাদ্য অধ্যায়ের কষে দেখি ৯ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' },
+      { no: 10, ex: '10.1', title: 'লাভ ও ক্ষতি (কষে দেখি 10.1)', desc: 'লাভ ও ক্ষতি অধ্যায়ের কষে দেখি ১০.১ এর সমস্ত উত্তর এখানে', json: '', color: 'orange' },
+      { no: 10, ex: '10.2', title: 'লাভ ও ক্ষতি (কষে দেখি 10.2)', desc: 'লাভ ও ক্ষতি অধ্যায়ের কষে দেখি ১০.২ এর সমস্ত উত্তর এখানে', json: '', color: 'orange' },
+      { no: 11, ex: '11.1', title: 'রাশিবিজ্ঞান (কষে দেখি 11.1)', desc: 'রাশিবিজ্ঞান অধ্যায়ের কষে দেখি ১১.১ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 11, ex: '11.2', title: 'রাশিবিজ্ঞান (কষে দেখি 11.2)', desc: 'রাশিবিজ্ঞান অধ্যায়ের কষে দেখি ১১.২ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 12, ex: '12', title: 'ক্ষেত্রফল সংক্রান্ত উপপাদ্য (কষে দেখি 12)', desc: 'ক্ষেত্রফল সংক্রান্ত উপপাদ্য অধ্যায়ের কষে দেখি ১২ এর সমস্ত উত্তর এখানে', json: '', color: 'pink' },
+      { no: 13, ex: '13', title: 'সম্পাদ্য : ত্রিভুজের সমান ক্ষেত্রফল বিশিষ্ট সামান্তরিক অঙ্কন (কষে দেখি 13)', desc: 'সম্পাদ্য : ত্রিভুজের সমান ক্ষেত্রফল বিশিষ্ট সামান্তরিক অঙ্কন অধ্যায়ের কষে দেখি ১৩ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 14, ex: '14', title: 'সম্পাদ্য : চতুর্ভুজের সমান ক্ষেত্রফল বিশিষ্ট ত্রিভুজ অঙ্কন (কষে দেখি 14)', desc: 'সম্পাদ্য : চতুর্ভুজের সমান ক্ষেত্রফল বিশিষ্ট ত্রিভুজ অঙ্কন অধ্যায়ের কষে দেখি ১৪ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 15, ex: '15.1', title: 'ত্রিভুজ ও চতুর্ভুজের পরিসীমা ও ক্ষেত্রফল (কষে দেখি 15.1)', desc: 'ত্রিভুজ ও চতুর্ভুজের পরিসীমা ও ক্ষেত্রফল অধ্যায়ের কষে দেখি ১৫.১ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' },
+      { no: 15, ex: '15.2', title: 'ত্রিভুজ ও চতুর্ভুজের পরিসীমা ও ক্ষেত্রফল (কষে দেখি 15.2)', desc: 'ত্রিভুজ ও চতুর্ভুজের পরিসীমা ও ক্ষেত্রফল অধ্যায়ের কষে দেখি ১৫.২ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' },
+      { no: 15, ex: '15.3', title: 'ত্রিভুজ ও চতুর্ভুজের পরিসীমা ও ক্ষেত্রফল (কষে দেখি 15.3)', desc: 'ত্রিভুজ ও চতুর্ভুজের পরিসীমা ও ক্ষেত্রফল অধ্যায়ের কষে দেখি ১৫.৩ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' },
+      { no: 16, ex: '16', title: 'বৃত্তের পরিধি (কষে দেখি 16)', desc: 'বৃত্তের পরিধি অধ্যায়ের কষে দেখি ১৬ এর সমস্ত উত্তর এখানে', json: '', color: 'orange' },
+      { no: 17, ex: '17', title: 'সমবিন্দু সংক্রান্ত উপপাদ্য (কষে দেখি 17)', desc: 'সমবিন্দু সংক্রান্ত উপপাদ্য অধ্যায়ের কষে দেখি ১৭ এর সমস্ত উত্তর এখানে', json: '', color: 'teal' },
+      { no: 18, ex: '18', title: 'বৃত্তের ক্ষেত্রফল (কষে দেখি 18)', desc: 'বৃত্তের ক্ষেত্রফল অধ্যায়ের কষে দেখি ১৮ এর সমস্ত উত্তর এখানে', json: '', color: 'pink' },
+      { no: 19, ex: '19', title: 'স্থানাঙ্ক জ্যামিতি: সরলরেখাংশের অন্তর্বিভক্ত ও বহিঃর্বিভক্ত (কষে দেখি 19)', desc: 'স্থানাঙ্ক জ্যামিতি: সরলরেখাংশের অন্তর্বিভক্ত ও বহিঃর্বিভক্ত অধ্যায়ের কষে দেখি ১৯ এর সমস্ত উত্তর এখানে', json: '', color: 'blue' },
+      { no: 20, ex: '20', title: 'স্থানাঙ্ক জ্যামিতি: ত্রিভুজাকৃতি ক্ষেত্রের ক্ষেত্রফল (কষে দেখি 20)', desc: 'স্থানাঙ্ক জ্যামিতি: ত্রিভুজাকৃতি ক্ষেত্রের ক্ষেত্রফল অধ্যায়ের কষে দেখি ২০ এর সমস্ত উত্তর এখানে', json: '', color: 'green' },
+      { no: 21, ex: '21', title: 'লগারিদম (কষে দেখি 21)', desc: 'লগারিদম অধ্যায়ের কষে দেখি ২১ এর সমস্ত উত্তর এখানে', json: '', color: 'purple' }
+    ];
+
+    const list = document.getElementById('chapter-list');
+    const emptyMessage = document.getElementById('empty-message');
+    const searchInput = document.getElementById('chapter-search');
+
+    function renderChapters(items) {
+      list.innerHTML = items.map(function (c) {
+        const col = colors[c.color];
+        return `
+          <button type="button" onclick="openChapter('${c.ex}')"
+            class="chapter-card flex w-full items-center gap-4 rounded-[20px] border border-[#e8eff9] bg-white px-4 py-4 text-left shadow-[0_2px_10px_rgba(30,64,110,0.04)]">
+            <div class="flex h-[68px] w-[68px] shrink-0 flex-col items-center justify-center rounded-full ${col.bg} ${col.text}">
+              <span class="text-[12px] leading-none">অধ্যায়</span>
+              <span class="mt-1 font-english text-[26px] font-semibold leading-none">${c.no}</span>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="text-[20px] leading-snug text-[#0f3d8a]">${c.title}</h3>
+              <p class="mt-1 text-[15px] leading-snug text-[#637895]">${c.desc}</p>
+            </div>
+            <i class="fa-solid fa-chevron-right pr-1 text-[18px] text-[#1565c9]"></i>
+          </button>`;
+      }).join('');
+      emptyMessage.classList.toggle('hidden', items.length > 0);
+    }
+
+    searchInput.addEventListener('input', function () {
+      const q = searchInput.value.trim().toLowerCase();
+      renderChapters(chapters.filter(function (c) {
+        return (c.title + ' ' + c.desc + ' ' + c.ex).toLowerCase().includes(q);
+      }));
+    });
+
+    function openChapter(ex) {
+      const item = chapters.find(function (c) { return c.ex === ex; });
+      try {
+        localStorage.setItem('ganitBondhuSelectedExercise', String(ex));
+      } catch (e) {}
+
+      // কোন JSON ফাইল লোড হবে: নিজের দেওয়া json, না থাকলে data/1-1.json ধরনের নাম
+      const path = (item && item.json) ? item.json : 'data/' + String(ex) + '.json';
+      const target = 'solution.html?file=' + encodeURIComponent(path);
+
+      // ফাইল আছে কিনা আগে দেখে নেয়; না থাকলে বার্তা দেখায়
+      fetch(path, { method: 'HEAD', cache: 'no-cache' })
+        .then(function (res) {
+          if (res.status === 404) {
+            showToast('এই অংশের সমাধান শীঘ্রই আসছে।');
+          } else {
+            window.location.href = target;
+          }
+        })
+        .catch(function () {
+          // যাচাই করা না গেলেও পেজ খুলে দেয়; সেখানে ত্রুটির বার্তা দেখাবে
+          window.location.href = target;
+        });
+    }
+
+    let toastTimer;
+    function showToast(text) {
+      const t = document.getElementById('toast');
+      t.textContent = text;
+      t.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { t.classList.add('hidden'); }, 2200);
+    }
+
+    renderChapters(chapters);
+  </script>
+
+</body>
+
+</html>

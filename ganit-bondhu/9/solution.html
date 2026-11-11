@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7faff">
+  <script>
+    // সংরক্ষিত Dark mode পেজ আঁকার আগেই চালু হয়, যাতে সাদা ঝলক না দেখা যায়
+    try {
+      if (localStorage.getItem('ganitBondhuTheme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e1726');
+      }
+    } catch (e) {}
+  </script>
+  <title>সমাধান — গণিত বন্ধু</title>
+
+  <script>
+    // ডেটা আনা সবার আগে শুরু হয় — ফন্ট, Tailwind বা MathJax লোডের জন্য অপেক্ষা করে না।
+    const CONFIG = {
+      // ডেটা অন্য ওয়েবসাইটে রাখলে তার ঠিকানা এখানে দিন, যেমন 'https://example.com'
+      // (নিরাপত্তার জন্য শুধু এই পেজের নিজের সাইট এবং এই তালিকার সাইট থেকেই ডেটা নেওয়া হয়)
+      trustedOrigins: []
+    };
+
+    function getDataUrl() {
+      const params = new URLSearchParams(location.search);
+      let file = params.get('file');
+      const ex = params.get('ex');
+
+      // সহজ লিংক: solution.html?ex=1.1  →  data/1.1.json
+      if (!file && ex && /^[0-9.]+$/.test(ex)) {
+        file = 'data/' + ex + '.json';
+      }
+      if (!file) return null;
+
+      let url;
+      try { url = new URL(file, location.href); } catch (e) { return null; }
+
+      const sameSite = url.origin === location.origin;
+      if (!sameSite && CONFIG.trustedOrigins.indexOf(url.origin) === -1) return null;
+      if (!/\.json$/i.test(url.pathname)) return null;
+      return url.href;
+    }
+
+    const dataUrl = getDataUrl();
+    const dataRequest = dataUrl
+      ? fetch(dataUrl, { cache: 'no-cache' }).then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+      : Promise.reject(new Error('no file'));
+    dataRequest.catch(function () {}); // ত্রুটি পরে নিচে সামলানো হয়
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../assets/theme.css">
+
+  <!-- MathJax (LaTeX support) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      chtml: {
+        scale: 1.08,
+        displayAlign: 'left',
+        displayIndent: '0'
+      }
+    };
+  </script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            bengali: ['Tiro Bangla', 'serif'],
+            english: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: "Tiro Bangla", serif; }
+    .app-shell { max-width: 520px; }
+
+    button:focus-visible {
+      outline: 3px solid #3989e9;
+      outline-offset: 2px;
+    }
+
+    /* আলাদা লাইনের সমীকরণ: বামদিকে সাজানো, বড় হলে স্ক্রল */
+    mjx-container[display="true"] {
+      text-align: left !important;
+      margin: .35em 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: .15em 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+  <script defer src="../assets/menu.js"></script>
+</head>
+
+<body class="min-h-screen bg-[#fbfcff] text-[#123d7d]">
+
+  <main class="app-shell relative mx-auto min-h-screen bg-[#f7faff] px-4 pb-12 shadow-[0_0_55px_rgba(36,69,112,0.05)] sm:px-5">
+
+    <!-- ===== Header ===== -->
+    <header class="flex items-center gap-3 pt-6">
+      <button type="button" onclick="history.back()" aria-label="পেছনে যান"
+        class="h-10 w-8 shrink-0 text-[#1554a4] transition hover:text-blue-600">
+        <i class="fa-solid fa-arrow-left text-[24px]"></i>
+      </button>
+
+      <img
+        src="https://www.appcreator24.com/srv/imgs/gen/4227302_icohome.png?ts=1792924059"
+        alt="গণিত বন্ধু অ্যাপ আইকন"
+        class="h-[60px] w-[60px] shrink-0 rounded-[18px] object-cover shadow-sm">
+
+      <div class="min-w-0 flex-1">
+        <h1 class="text-[24px] leading-tight text-[#1554a4]">গণিত বন্ধু</h1>
+        <p class="font-english text-[12px] leading-snug text-[#637895]">WBBSE Math Solutions</p>
+      </div>
+
+      <button type="button" id="bookmark-btn" aria-label="বুকমার্ক" aria-pressed="false"
+        class="h-10 w-9 shrink-0 text-[#234a80] transition hover:text-blue-600">
+        <i id="bookmark-icon" class="fa-regular fa-bookmark text-[22px]"></i>
+      </button>
+      <div id="menu-root" class="relative shrink-0">
+        <button type="button" id="menu-btn" aria-label="মেনু" aria-haspopup="menu" aria-expanded="false" aria-controls="gb-menu"
+          class="h-10 w-7 text-[#234a80] transition hover:text-blue-600">
+          <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== Breadcrumb (ডেটা লোড হলে দেখাবে) ===== -->
+    <nav id="breadcrumb" aria-label="অবস্থান" class="mt-3 hidden flex-nowrap items-center gap-1.5 rounded-[16px] bg-white p-2 shadow-[0_2px_10px_rgba(30,64,110,0.04)]">
+      <span class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#e3eefd] px-3 py-1 font-english text-[12px] text-[#1565c9]">
+        <i class="fa-solid fa-graduation-cap text-[11px]"></i>
+        <span>Class <span id="bc-class"></span></span>
+      </span>
+      <i class="fa-solid fa-chevron-right shrink-0 text-[10px] text-[#8a9bb4]"></i>
+      <span id="bc-chapter" class="min-w-0 truncate whitespace-nowrap rounded-full bg-[#ece6ff] px-3 py-1 text-[12px] text-[#5a37c0]"></span>
+      <i class="fa-solid fa-chevron-right shrink-0 text-[10px] text-[#8a9bb4]"></i>
+      <span id="bc-exercise" class="shrink-0 whitespace-nowrap rounded-full bg-[#d9f5e5] px-3 py-1 font-english text-[12px] text-[#14754d]"></span>
+    </nav>
+
+    <!-- ===== ত্রুটি: শুধু 404 ও Reload again ===== -->
+    <div id="status" role="alert" class="mt-16 hidden text-center">
+      <p class="font-english text-[88px] font-extrabold leading-none text-[#1565c9]">404</p>
+      <button type="button" onclick="location.reload()"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-[#1565c9] px-7 py-3 font-english text-[17px] font-medium text-white shadow-md transition hover:bg-[#0f54ad]">
+        <i class="fa-solid fa-rotate-right"></i> Reload again
+      </button>
+    </div>
+
+    <!-- ===== প্রশ্ন ও সমাধান ===== -->
+    <div id="questions" class="mt-4 space-y-8"></div>
+
+  </main>
+
+  <script>
+    /* =====================================================================
+       এই একটাই পেজ সব কষে দেখির সমাধান দেখায়।
+       ডেটা আসে আলাদা JSON ফাইল থেকে, যেমন:  solution.html?file=data/1-1.json
+
+       JSON ফাইলের গঠন:
+       {
+         "meta": { "classNo": 9, "chapterNo": 1, "chapterTitle": "বাস্তব সংখ্যা", "exercise": "1.1" },
+         "questions": [
+           {
+             "no": "1", "part": "(i)",            ← no, part ঐচ্ছিক
+             "svg": "<svg>...</svg>",              ← ঐচ্ছিক চিত্র; সমাধানের লেখার আগে দেখায়, না থাকলে বা "" হলে বাদ
+             "question": "...", "expr": "2x+3=11", ← expr ঐচ্ছিক (শুধু LaTeX)
+             "solution": [ "লেখা $x=4$", "$$\\frac{8}{2}$$", { "img": "images/a.png", "alt": "বর্ণনা" } ]
+           }
+         ]
+       }
+
+       solution-এর উপাদান:
+         "সাধারণ লেখা"                    → আলাদা লাইন ($...$ = লাইনের ভেতরে গণিত, $$...$$ = আলাদা লাইনে)
+         "**বোল্ড** লেখা"                  → ** দিয়ে মোটা অক্ষর
+         { "img": "...", "alt": "..." }    → ছবি
+         { "numberline": {"min":0,"max":8,"point":7,"label":"7"} } → সংখ্যারেখা
+         { "html": "<svg>...</svg>" }      → নিজের HTML/SVG
+
+       JSON-এর নিয়ম: শুধু "ডাবল কোটেশন", শেষ উপাদানের পর কমা নয়,
+       ব্যাকস্ল্যাশ দুটো (\\frac), নতুন লাইন \n, চওড়া ফাঁক \u2003
+       ===================================================================== */
+
+    let meta = {};
+    let questions = [];
+
+    /* ===================== ত্রুটি: শুধু 404 + Reload again ===================== */
+
+    function showError() {
+      const bc = document.getElementById('breadcrumb');
+      bc.classList.add('hidden');
+      bc.classList.remove('flex');
+      document.getElementById('questions').innerHTML = '';
+      document.getElementById('status').classList.remove('hidden');
+    }
+
+    /* ===================== HTML তৈরির ফাংশন ===================== */
+
+    function esc(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+    function escAttr(value) {
+      return esc(value).replace(/"/g, '&quot;');
+    }
+
+    function formatText(t) {
+      return esc(t).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    }
+
+    function fmtNum(n) {
+      const s = String(Math.round(n * 1000) / 1000);
+      return s.charAt(0) === '-' ? '\u2212' + s.slice(1) : s;
+    }
+
+    // সংখ্যারেখা: { numberline: { min, max, point, label, step } }
+    let nlCounter = 0;
+    function numberLineSvg(cfg) {
+      const min = Number(cfg.min), max = Number(cfg.max);
+      if (!(max > min)) return '';
+      const id = ++nlCounter;
+      const step = Number(cfg.step) || 1;
+      const x0 = 30, x1 = 370;
+      const toX = function (v) { return x0 + (v - min) / (max - min) * (x1 - x0); };
+
+      let ticks = '';
+      const count = Math.round((max - min) / step);
+      for (let i = 0; i <= count; i++) {
+        const v = min + i * step;
+        const x = toX(v).toFixed(2);
+        ticks +=
+          '<line x1="' + x + '" y1="25" x2="' + x + '" y2="35" stroke="#64748b" stroke-width="2"/>' +
+          '<text x="' + x + '" y="50" font-size="12" fill="#64748b" text-anchor="middle">' + esc(fmtNum(v)) + '</text>';
+      }
+
+      let point = '';
+      if (cfg.point !== undefined && cfg.point !== null) {
+        const px = toX(Number(cfg.point)).toFixed(2);
+        const label = String(cfg.label !== undefined ? cfg.label : fmtNum(Number(cfg.point))).replace(/^-/, '\u2212');
+        point =
+          '<circle cx="' + px + '" cy="30" r="4" fill="#ef4444"/>' +
+          '<text x="' + px + '" y="15" font-size="14" fill="#ef4444" font-weight="bold" text-anchor="middle">' + esc(label) + '</text>';
+      }
+
+      const svg =
+        '<svg viewBox="0 0 400 60" width="100%" role="img" aria-label="সংখ্যারেখা" ' +
+        'style="max-width:400px;background:#ffffff;border:1px solid #eaecf0;border-radius:8px;padding:10px;">' +
+        '<defs>' +
+        '<marker id="nl-a' + id + '" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/></marker>' +
+        '<marker id="nl-s' + id + '" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 10 0 L 0 5 L 10 10 z" fill="#334155"/></marker>' +
+        '</defs>' +
+        '<line x1="20" y1="30" x2="380" y2="30" stroke="#334155" stroke-width="2" marker-end="url(#nl-a' + id + ')" marker-start="url(#nl-s' + id + ')"/>' +
+        ticks + point + '</svg>';
+
+      return '<div class="my-3 flex justify-center">' + svg + '</div>';
+    }
+
+    function solutionHtml(sol) {
+      const lines = Array.isArray(sol) ? sol : String(sol || '').split('\n');
+      return lines.map(function (l) {
+        if (l && typeof l === 'object') {
+          if (l.numberline) return numberLineSvg(l.numberline);
+          if (l.img) {
+            return '<div class="my-3 flex justify-center">' +
+              '<img src="' + escAttr(l.img) + '" alt="' + escAttr(l.alt || 'চিত্র') + '" loading="lazy" ' +
+              'class="h-auto max-w-full rounded-lg border border-[#eaecf0] bg-white">' +
+              '</div>';
+          }
+          if (l.html) return '<div class="my-3 flex justify-center overflow-x-auto">' + l.html + '</div>';
+          return '';
+        }
+        if (String(l).trim() === '') return '';
+        const gap = String(l).indexOf('**') === 0 ? ' mt-4' : '';
+        return '<div class="text-[18px] leading-[1.8] text-[#14305c]' + gap + '">' + formatText(l) + '</div>';
+      }).join('');
+    }
+
+    // প্রশ্নের "svg" ফিল্ড: খালি ("") হলে কিছু দেখায় না
+    function figureHtml(svg) {
+      if (!svg || !String(svg).trim()) return '';
+      return '<div class="mt-4 flex justify-center overflow-x-auto">' + svg + '</div>';
+    }
+
+    function questionHtml(q, index) {
+      const no = (q.no !== undefined && q.no !== null && String(q.no).trim() !== '') ? q.no : index + 1;
+      const badge = 'Q.' + esc(no);
+      const exprLine = q.expr
+        ? '<p class="mt-2 text-[20px] text-[#14305c]">' +
+            (q.part ? '<span class="mr-3 italic">' + esc(q.part) + '</span>' : '') +
+            '$' + esc(q.expr) + '$</p>'
+        : (q.part ? '<p class="mt-2 text-[18px] italic text-[#14305c]">' + esc(q.part) + '</p>' : '');
+
+      return `
+        <article aria-label="প্রশ্ন ${esc(no)}" class="space-y-4">
+
+          <!-- প্রশ্ন -->
+          <section class="flex items-start gap-4 rounded-[20px] border border-[#d9e6f8] bg-[#eef4fd] p-4">
+            <span class="flex h-[64px] w-[64px] shrink-0 items-center justify-center rounded-full bg-[#2f80e8] font-english text-[20px] font-semibold text-white">${badge}</span>
+            <div class="min-w-0 flex-1 pt-1">
+              <p class="whitespace-pre-line text-[18px] leading-snug text-[#14305c]">${esc(q.question)}</p>
+              ${exprLine}
+            </div>
+            <button type="button" onclick="copyQuestion(${index}, this)" aria-label="প্রশ্ন কপি করুন"
+              class="h-9 w-9 shrink-0 text-[#1554a4] transition hover:text-blue-600">
+              <i class="fa-regular fa-copy text-[22px]"></i>
+            </button>
+          </section>
+
+          <!-- সমাধান -->
+          <section class="rounded-[20px] border border-[#e8eff9] bg-white p-4 shadow-[0_2px_10px_rgba(30,64,110,0.04)]">
+            <div class="flex items-center gap-3">
+              <span class="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#2fb36d] text-white">
+                <i class="fa-regular fa-lightbulb text-[22px]"></i>
+              </span>
+              <h2 class="text-[22px] font-bold text-[#0f2a5c]">সমাধান</h2>
+            </div>
+            ${figureHtml(q.svg)}
+            <div class="mt-4 space-y-1">${solutionHtml(q.solution)}</div>
+          </section>
+
+        </article>`;
+    }
+
+    function copyQuestion(index, btn) {
+      const q = questions[index];
+      const text = [q.question, (q.part ? q.part + ' ' : '') + (q.expr || '')].join('\n').trim();
+      const icon = btn.querySelector('i');
+      const done = function () {
+        icon.className = 'fa-solid fa-check text-[22px]';
+        setTimeout(function () { icon.className = 'fa-regular fa-copy text-[22px]'; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {});
+      }
+    }
+
+    /* ===================== MathJax ===================== */
+
+    // MathJax পরে লোড হলে নিজেই পুরো পেজ রেন্ডার করে;
+    // আগে লোড হয়ে গেলে নতুন অংশটুকু এখান থেকে রেন্ডার হয়।
+    function typeset(el) {
+      const M = window.MathJax;
+      if (M && M.startup && M.startup.promise) {
+        M.startup.promise.then(function () {
+          if (M.typesetPromise) return M.typesetPromise([el]);
+        }).catch(function () {});
+      }
+    }
+
+    /* ===================== বুকমার্ক ===================== */
+
+    function initBookmark() {
+      const key = 'ganitBondhuBookmark:' + meta.classNo + ':' + meta.exercise;
+      const btn = document.getElementById('bookmark-btn');
+      const icon = document.getElementById('bookmark-icon');
+
+      function paint(on) {
+        icon.className = (on ? 'fa-solid' : 'fa-regular') + ' fa-bookmark text-[22px]';
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+
+      let saved = false;
+      try { saved = localStorage.getItem(key) === '1'; } catch (e) {}
+      paint(saved);
+
+      btn.onclick = function () {
+        saved = !saved;
+        paint(saved);
+        try {
+          if (saved) localStorage.setItem(key, '1'); else localStorage.removeItem(key);
+        } catch (e) {}
+      };
+    }
+
+    /* ===================== ডেটা লোড ও দেখানো ===================== */
+
+    function render(data) {
+      meta = data.meta || {};
+      questions = data.questions;
+
+      document.getElementById('bc-class').textContent = meta.classNo != null ? meta.classNo : '';
+      document.getElementById('bc-chapter').textContent =
+        'Chapter ' + (meta.chapterNo != null ? meta.chapterNo : '') + (meta.chapterTitle ? ': ' + meta.chapterTitle : '');
+      document.getElementById('bc-exercise').textContent = 'Exercise ' + (meta.exercise || '');
+      const chapterPill = document.getElementById('bc-chapter');
+      chapterPill.title = chapterPill.textContent;
+      const bc = document.getElementById('breadcrumb');
+      bc.classList.remove('hidden');
+      bc.classList.add('flex');
+
+      document.title = 'Exercise ' + (meta.exercise || '') + ' সমাধান — গণিত বন্ধু';
+
+      const box = document.getElementById('questions');
+      box.innerHTML = questions.map(questionHtml).join('');
+      typeset(box);
+      initBookmark();
+    }
+
+    // ডেটা <head> থেকেই আনা শুরু হয়েছে; এসে গেলে সঙ্গে সঙ্গে দেখায়
+    dataRequest
+      .then(function (data) {
+        if (!data || !Array.isArray(data.questions) || !data.questions.length) throw new Error('bad data');
+        render(data);
+      })
+      .catch(showError);
+  </script>
+
+</body>
+
+</html>

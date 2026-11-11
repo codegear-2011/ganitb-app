@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>সেটিংস — গণিত বন্ধু</title>
+
+  <script>
+    try {
+      if (localStorage.getItem('ganitBondhuTheme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e1726');
+      }
+    } catch (e) {}
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/theme.css">
+
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { bengali: ['Hind Siliguri', 'sans-serif'], english: ['Inter', 'sans-serif'] } } } }
+  </script>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Hind Siliguri', sans-serif; overscroll-behavior-y: none; }
+    a, button { touch-action: manipulation; }
+    .app-shell { max-width: 520px; }
+    #apply:disabled { opacity: .5; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+
+<body class="min-h-screen bg-[#fbfcff] text-[#123b78]">
+  <main class="app-shell relative mx-auto min-h-screen bg-[#f7faff] px-5 pb-12 shadow-[0_0_55px_rgba(36,69,112,0.05)] sm:px-7">
+
+    <!-- Header -->
+    <header class="flex items-center gap-4" style="padding-top:max(24px,env(safe-area-inset-top))">
+      <button type="button" id="back" aria-label="পেছনে যান" class="h-10 w-8 shrink-0 text-[#234a80]">
+        <i class="fa-solid fa-arrow-left text-[26px]"></i>
+      </button>
+      <h1 class="flex-1 text-[28px] font-bold leading-tight text-[#1554a4]">সেটিংস</h1>
+      <div class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#eaf3ff] text-[#2877d7]"><i class="fa-solid fa-gear text-[22px]"></i></div>
+    </header>
+
+    <div class="mt-6 space-y-4">
+
+      <!-- ১. ক্লাস নির্বাচন (সবার আগে) -->
+      <section class="rounded-[24px] border-2 border-[#e1ebf9] bg-white p-5">
+        <div class="flex items-center gap-3">
+          <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#eaf3ff] text-[#2877d7]"><i class="fa-solid fa-graduation-cap text-[22px]"></i></div>
+          <div class="min-w-0 flex-1">
+            <h2 class="text-[20px] font-bold leading-tight text-[#123d7d]">ক্লাস নির্বাচন</h2>
+            <p id="class-now" class="mt-0.5 text-[15px] text-[#637895]"></p>
+          </div>
+        </div>
+        <div id="class-picker" class="mt-4"></div>
+        <button type="button" id="apply" class="mt-4 w-full rounded-[16px] bg-[#1565c9] py-3 text-[18px] font-semibold text-white">Apply</button>
+      </section>
+
+      <!-- ২. Mode -->
+      <section class="rounded-[24px] border-2 border-[#e1ebf9] bg-white p-5">
+        <div class="flex items-center gap-3">
+          <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#f1edff] text-[#7962df]"><i class="fa-solid fa-circle-half-stroke text-[22px]"></i></div>
+          <h2 class="flex-1 text-[20px] font-bold leading-tight text-[#123d7d]">Mode</h2>
+        </div>
+        <div class="gb-switch mt-4" id="mode-switch" role="group" aria-label="Mode" data-active="light" style="font-family:Inter,sans-serif">
+          <span class="gb-thumb" aria-hidden="true"></span>
+          <button type="button" data-mode="dark"><i class="fa-solid fa-moon"></i><span>Dark</span></button>
+          <button type="button" data-mode="light"><i class="fa-solid fa-sun"></i><span>Light</span></button>
+        </div>
+      </section>
+
+      <!-- ৩. সেভ করা তথ্য -->
+      <section class="rounded-[24px] border-2 border-[#e1ebf9] bg-white p-5">
+        <div class="flex items-center gap-3">
+          <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#fff3e3] text-[#e99127]"><i class="fa-solid fa-database text-[21px]"></i></div>
+          <div class="min-w-0 flex-1">
+            <h2 class="text-[20px] font-bold leading-tight text-[#123d7d]">সেভ করা তথ্য</h2>
+            <p class="mt-0.5 text-[15px] leading-snug text-[#637895]">ক্লাস, Mode ও বুকমার্ক এই ফোনেই সেভ থাকে।</p>
+          </div>
+        </div>
+        <button type="button" id="reset" class="mt-4 w-full rounded-[16px] border-2 border-[#f3c6ce] bg-[#fff5f6] py-3 text-[17px] font-semibold text-[#d6455d]">
+          <i class="fa-regular fa-trash-can"></i> সব মুছে নতুন করে শুরু
+        </button>
+      </section>
+
+      <!-- ৪. অ্যাপ সম্পর্কে -->
+      <section class="rounded-[24px] border-2 border-[#e1ebf9] bg-white p-5">
+        <div class="flex items-center gap-3">
+          <div class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#e9f7ef] text-[#2da16c]"><i class="fa-solid fa-circle-info text-[22px]"></i></div>
+          <div class="min-w-0 flex-1">
+            <h2 class="text-[20px] font-bold leading-tight text-[#123d7d]">অ্যাপ সম্পর্কে</h2>
+            <p class="mt-0.5 text-[15px] leading-snug text-[#637895]">গণিত বন্ধু — WBBSE Math Solutions</p>
+          </div>
+        </div>
+        <p class="mt-3 text-[15px] leading-relaxed text-[#526984]">ক্লাসভিত্তিক গণিতের অধ্যায় ও অনুশীলনীর সমাধান এক জায়গায়।<br>সংস্করণ <span class="font-english">1.0</span></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      var $ = function (s) { return document.querySelector(s); };
+
+      // পেছনে যাওয়া (ইতিহাস না থাকলে হোমে)
+      $('#back').addEventListener('click', function () {
+        if (history.length > 1) history.back(); else window.location.href = 'index.html';
+      });
+
+      /* ---- ক্লাস ---- */
+      var pending = GB.getClass();
+      var apply = $('#apply');
+      var picker = GB.classPicker($('#class-picker'), pending, function (v) { pending = v; paintApply(); });
+
+      function paintNow() {
+        var c = GB.getClass();
+        $('#class-now').textContent = c ? 'বর্তমান: ' + GB.label(c) : 'এখনো ক্লাস বেছে নেওয়া হয়নি';
+      }
+      function paintApply() { apply.disabled = !pending || pending === GB.getClass(); }
+
+      apply.addEventListener('click', function () {
+        if (!pending) return;
+        if (!GB.setClass(pending)) { GB.toast('সেভ করা যায়নি — ব্রাউজারের সংরক্ষণ বন্ধ আছে।'); return; }
+        paintNow(); paintApply();
+        GB.toast(GB.label(pending) + ' সেভ হয়েছে');
+      });
+      paintNow(); paintApply();
+
+      /* ---- Mode (বাঁদিকে Dark, ডানদিকে Light) ---- */
+      var sw = $('#mode-switch');
+      function paintMode() {
+        var m = GB.getTheme();
+        sw.setAttribute('data-active', m);
+        Array.prototype.forEach.call(sw.querySelectorAll('[data-mode]'), function (b) {
+          b.setAttribute('aria-pressed', b.getAttribute('data-mode') === m ? 'true' : 'false');
+        });
+      }
+      sw.addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('[data-mode]') : null;
+        if (!b) return;
+        GB.applyTheme(b.getAttribute('data-mode'), true);
+        paintMode();
+      });
+      paintMode();
+
+      /* ---- সব মুছুন ---- */
+      $('#reset').addEventListener('click', function () {
+        GB.confirmBox('সেভ করা ক্লাস, Mode ও বুকমার্ক সব মুছে যাবে। চালিয়ে যাবেন?', 'মুছুন', function () {
+          GB.clearAll();
+          pending = null; picker.set(null);
+          paintNow(); paintApply(); paintMode();
+          GB.toast('সব তথ্য মুছে ফেলা হয়েছে');
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

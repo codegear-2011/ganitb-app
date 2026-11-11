@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>গণিত বন্ধু — WBBSE Math Solutions</title>
+
+  <script>
+    // সংরক্ষিত Dark mode পেজ আঁকার আগেই চালু হয়
+    try {
+      if (localStorage.getItem('ganitBondhuTheme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e1726');
+      }
+    } catch (e) {}
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/theme.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { bengali: ['Hind Siliguri', 'sans-serif'], english: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Hind Siliguri', sans-serif; overscroll-behavior-y: none; }
+    a, button { touch-action: manipulation; }
+    .app-shell { max-width: 520px; }
+    .soft-card { transition: transform .22s ease, box-shadow .22s ease; }
+    .soft-card:active { transform: scale(.985); }
+    .math-doodle { position: absolute; color: #b8d6ff; font-family: 'Inter', sans-serif; font-weight: 700; pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+
+<body class="min-h-screen bg-[#fbfcff] text-[#123b78]">
+  <main class="app-shell relative mx-auto min-h-screen overflow-hidden bg-white pb-12 shadow-[0_0_55px_rgba(36,69,112,0.05)]">
+
+    <!-- Header -->
+    <header class="px-5 pb-5 sm:px-7" style="padding-top:max(28px,env(safe-area-inset-top))">
+      <div class="flex items-center gap-4">
+
+        <div class="h-[76px] w-[76px] shrink-0 overflow-hidden rounded-[23px] shadow-md">
+          <img src="https://i.ibb.co/XB8MDqJ/0a7997c8-9ec7-44a2-9b04-86a7e02010a3.png" alt="গণিত বন্ধু App Icon" class="h-full w-full object-cover">
+        </div>
+
+        <div class="min-w-0 flex-1">
+          <h1 class="text-[27px] font-bold leading-tight tracking-tight text-[#1554a4] sm:text-3xl">গণিত বন্ধু</h1>
+          <p class="mt-1 font-english text-[13px] text-[#637895] sm:text-[15px]">WBBSE Math Solutions</p>
+        </div>
+
+        <!-- সেটিংস -->
+        <a href="settings.html" aria-label="সেটিংস" class="grid h-11 w-11 shrink-0 place-items-center rounded-full text-[#607794]">
+          <i class="fa-solid fa-gear text-[25px]"></i>
+        </a>
+
+      </div>
+    </header>
+
+    <!-- Welcome banner -->
+    <section class="px-5 sm:px-7">
+      <div class="relative flex min-h-[190px] items-center overflow-hidden rounded-[27px] bg-gradient-to-br from-[#edf5ff] to-[#dcecff] px-5 py-6 sm:px-7">
+        <div class="relative z-10 w-[62%]">
+          <p class="text-[30px] font-bold leading-tight text-[#123d7d] sm:text-[34px]">স্বাগতম!</p>
+          <p class="mt-3 text-[18px] leading-[1.55] text-[#526984] sm:text-[20px]">চলো, আজকের অঙ্কগুলো<br>আরও সহজ করে<br>তুলি।</p>
+        </div>
+
+        <div class="absolute bottom-3 right-3 flex h-[145px] w-[43%] items-end justify-center">
+          <span class="math-doodle right-1 top-0 rotate-[-10deg] text-[25px]">a²+b²=c²</span>
+          <span class="math-doodle right-1 top-10 rotate-[12deg] text-[20px]">△</span>
+          <div class="absolute bottom-2 h-5 w-[92%] rounded-[50%] bg-[#c5ddfb]"></div>
+          <div class="relative z-10 w-[95%]">
+            <div class="mx-auto -mb-0 flex h-[34px] w-[45px] justify-center gap-1 rounded-b-xl bg-[#1554a4] pt-1 shadow-sm">
+              <span class="-mt-5 h-6 w-2 rotate-[-8deg] rounded-t-sm bg-[#ffb13d]"></span>
+              <span class="-mt-6 h-7 w-2 rotate-[12deg] rounded-t-sm bg-[#2179d5]"></span>
+            </div>
+            <div class="-mt-1 h-7 rounded-md bg-[#2476d2] shadow-sm"></div>
+            <div class="h-5 rounded-b-md border-b-[5px] border-[#c7ddf6] bg-white"></div>
+            <div class="mt-1 h-7 rounded-md bg-[#ffbd32] shadow-sm"></div>
+            <div class="h-4 rounded-b-md border-b-[4px] border-[#f1d38b] bg-white"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main shortcuts -->
+    <section class="mt-5 grid grid-cols-2 gap-4 px-5 sm:px-7">
+
+      <!-- পাঠ্যবই সমাধান: সেভ করা ক্লাসের অধ্যায় তালিকা সরাসরি খোলে -->
+      <button type="button" data-go="textbook" class="soft-card flex min-h-[190px] flex-col justify-between rounded-[25px] bg-[#eaf3ff] p-5 text-left">
+        <div class="text-[49px] leading-none text-[#3e8be8]"><i class="fa-solid fa-book-open"></i></div>
+        <div>
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-[22px] font-bold leading-tight text-[#123d7d] sm:text-[24px]">পাঠ্যবই সমাধান</h2>
+            <i class="fa-solid fa-chevron-right text-lg text-[#2877d7]"></i>
+          </div>
+          <p id="tb-desc" class="mt-2 text-[15px] leading-snug text-[#637b9a] sm:text-[16px]">অধ্যায়ভিত্তিক সমাধান দেখুন</p>
+        </div>
+      </button>
+
+      <button type="button" data-soon="অনুশীলনী" class="soft-card flex min-h-[190px] flex-col justify-between rounded-[25px] bg-[#e9f7ef] p-5 text-left">
+        <div class="text-[47px] leading-none text-[#2da16c]"><i class="fa-solid fa-file-pen"></i></div>
+        <div>
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-[22px] font-bold leading-tight text-[#12563f] sm:text-[24px]">অনুশীলনী</h2>
+            <i class="fa-solid fa-chevron-right text-lg text-[#24865b]"></i>
+          </div>
+          <p class="mt-2 text-[15px] leading-snug text-[#648776] sm:text-[16px]">নিজে নিজে অনুশীলন করুন</p>
+        </div>
+      </button>
+
+      <button type="button" data-soon="গুরুত্বপূর্ণ প্রশ্ন" class="soft-card flex min-h-[190px] flex-col justify-between rounded-[25px] bg-[#fff3e3] p-5 text-left">
+        <div class="text-[48px] leading-none text-[#ffb13d]"><i class="fa-solid fa-lightbulb"></i></div>
+        <div>
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-[22px] font-bold leading-tight text-[#123d7d] sm:text-[24px]">গুরুত্বপূর্ণ প্রশ্ন</h2>
+            <i class="fa-solid fa-chevron-right text-lg text-[#e99127]"></i>
+          </div>
+          <p class="mt-2 text-[15px] leading-snug text-[#8b7b67] sm:text-[16px]">পরীক্ষার জন্য প্রস্তুত হোন</p>
+        </div>
+      </button>
+
+      <button type="button" data-soon="ফর্মুলা ও টিপস" class="soft-card flex min-h-[190px] flex-col justify-between rounded-[25px] bg-[#f1edff] p-5 text-left">
+        <div class="text-[48px] leading-none text-[#7962df]"><i class="fa-solid fa-chart-column"></i></div>
+        <div>
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-[22px] font-bold leading-tight text-[#123d7d] sm:text-[24px]">ফর্মুলা ও টিপস</h2>
+            <i class="fa-solid fa-chevron-right text-lg text-[#7055d1]"></i>
+          </div>
+          <p class="mt-2 text-[15px] leading-snug text-[#7c739c] sm:text-[16px]">দ্রুত মনে রাখার উপায়</p>
+        </div>
+      </button>
+    </section>
+
+    <!-- Motivational quote -->
+    <section class="relative overflow-hidden px-7 pb-9 pt-8 text-center">
+      <span class="math-doodle left-7 top-8 rotate-[-14deg] text-[40px]">√</span>
+      <span class="math-doodle right-8 top-8 rotate-[12deg] text-[42px]">π</span>
+      <p class="relative z-10 text-[18px] leading-relaxed text-[#536c8e] sm:text-[20px]">
+        “অঙ্ক কঠিন নয়,<br>সঠিক পথটাই শুধু জানা দরকার।”
+      </p>
+      <div class="mx-auto mt-4 h-[4px] w-24 rounded-full bg-[#1c5da8]"></div>
+    </section>
+
+    <!-- নিচের হালকা ঢেউ -->
+    <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#eaf3ff] to-[#ffffff] opacity-80"></div>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      var desc = document.getElementById('tb-desc');
+
+      // বর্ণনায় সেভ করা ক্লাস দেখায়
+      function refresh() {
+        var c = GB.getClass();
+        desc.textContent = c ? GB.label(c) + 'র অধ্যায়ভিত্তিক সমাধান' : 'অধ্যায়ভিত্তিক সমাধান দেখুন';
+      }
+      refresh();
+      // সেটিংস থেকে ফিরে এলে (back) নতুন ক্লাস দেখাতে
+      window.addEventListener('pageshow', refresh);
+
+      document.querySelector('[data-go="textbook"]').addEventListener('click', GB.openTextbook);
+      Array.prototype.forEach.call(document.querySelectorAll('[data-soon]'), function (b) {
+        b.addEventListener('click', function () { GB.toast(b.getAttribute('data-soon') + ' শীঘ্রই আসছে।'); });
+      });
+
+      // প্রথমবার খুললে (সেভ করা ক্লাস নেই) ক্লাস বেছে নেওয়ার পপআপ
+      if (!GB.getClass()) {
+        var skipped = false;
+        try { skipped = sessionStorage.getItem('gbSkipClass') === '1'; } catch (e) {}
+        if (!skipped) setTimeout(function () { GB.promptClass({ onApply: refresh }); }, 500);
+      }
+    })();
+  </script>
+</body>
+
+</html>

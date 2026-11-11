@@ -1,0 +1,147 @@
+/* গণিত বন্ধু — থ্রি-ডটস মেনু ও Dark mode (সব পেজে একই ফাইল)
+   নিচের "স্বয়ংক্রিয়" অংশ পেজগুলোর রঙ থেকে তৈরি। নতুন রঙের ক্লাস যোগ করলে সেটির Dark রঙ আবার তৈরি করতে হবে। */
+
+html.dark { color-scheme: dark; }
+html.dark img[class~="bg-white"] { background-color: #fff; }
+html.dark ::selection { background: #2f80e8; color: #fff; }
+
+/* ---------- ফ্লোটিং মেনু ---------- */
+.gb-menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 60;
+  width: 224px; padding: 6px; border-radius: 16px;
+  background: #fff; border: 1px solid #e1ebf9;
+  box-shadow: 0 14px 34px rgba(18, 61, 125, .16);
+  font-family: Inter, "Tiro Bangla", sans-serif;
+}
+.gb-menu[hidden], .gb-mode[hidden] { display: none; }
+
+.gb-item {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border-radius: 10px; text-align: left;
+  font-size: 16px; color: #123d7d; background: transparent;
+}
+.gb-item:hover { background: #eef4fd; }
+.gb-ico { width: 18px; text-align: center; color: #1565c9; }
+.gb-chev { margin-left: auto; font-size: 12px; color: #8a9bb4; transition: transform .2s ease; }
+.gb-item[aria-expanded="true"] .gb-chev { transform: rotate(180deg); }
+
+.gb-mode { padding: 6px 6px 8px; }
+.gb-switch {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr;
+  padding: 4px; border-radius: 999px; background: #e8f0fc;
+}
+.gb-switch button {
+  position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 8px 0; border-radius: 999px;
+  font-size: 14px; color: #637895; background: transparent; transition: color .2s ease;
+}
+.gb-switch button[aria-pressed="true"] { color: #fff; }
+.gb-thumb {
+  position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc((100% - 8px) / 2);
+  border-radius: 999px; background: #1565c9; transition: transform .22s ease;
+}
+.gb-switch[data-active="light"] .gb-thumb { transform: translateX(100%); }
+
+.gb-item:focus-visible, .gb-switch button:focus-visible { outline: 3px solid #3989e9; outline-offset: 2px; }
+
+html.dark .gb-menu { background: #172234; border-color: #2a3a52; box-shadow: 0 14px 34px rgba(0, 0, 0, .5); }
+html.dark .gb-item { color: #dbe7fb; }
+html.dark .gb-item:hover { background: #203049; }
+html.dark .gb-ico { color: #7db4f5; }
+html.dark .gb-switch { background: #0f1a2b; }
+html.dark .gb-switch button { color: #9db0cc; }
+html.dark .gb-switch button[aria-pressed="true"] { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gb-thumb, .gb-chev, .gb-switch button { transition: none; }
+}
+
+/* ===== স্বয়ংক্রিয়: Dark mode-এর রঙ ===== */
+html.dark [class~="bg-white"] { background-color: #1e2836; }
+html.dark [class~="bg-[#123d7d]"] { background-color: #123d7d; }
+html.dark [class~="bg-[#1554a4]"] { background-color: #1554a4; }
+html.dark [class~="bg-[#1565c9]"] { background-color: #1565c9; }
+html.dark [class~="bg-[#1c5da8]"] { background-color: #1c5da8; }
+html.dark [class~="bg-[#2179d5]"] { background-color: #2179d5; }
+html.dark [class~="bg-[#2476d2]"] { background-color: #2476d2; }
+html.dark [class~="bg-[#2f80e8]"] { background-color: #2f80e8; }
+html.dark [class~="bg-[#2fb36d]"] { background-color: #2fb36d; }
+html.dark [class~="bg-[#c5ddfb]"] { background-color: #263c57; }
+html.dark [class~="bg-[#cdf3f3]"] { background-color: #2d5050; }
+html.dark [class~="bg-[#d6455d]"] { background-color: #d6455d; }
+html.dark [class~="bg-[#d6f5e4]"] { background-color: #294737; }
+html.dark [class~="bg-[#d9f5e5]"] { background-color: #284534; }
+html.dark [class~="bg-[#dbeafe]"] { background-color: #1b2d44; }
+html.dark [class~="bg-[#e3eefd]"] { background-color: #1b293c; }
+html.dark [class~="bg-[#e9e2ff]"] { background-color: #21183e; }
+html.dark [class~="bg-[#e9f7ef]"] { background-color: #22352a; }
+html.dark [class~="bg-[#eaf3ff]"] { background-color: #152437; }
+html.dark [class~="bg-[#ece6ff]"] { background-color: #1f163b; }
+html.dark [class~="bg-[#eef4fd]"] { background-color: #182232; }
+html.dark [class~="bg-[#f1edff]"] { background-color: #1b1435; }
+html.dark [class~="bg-[#f1f6fe]"] { background-color: #151f30; }
+html.dark [class~="bg-[#f4f9ff]"] { background-color: #161e2a; }
+html.dark [class~="bg-[#f7faff]"] { background-color: #151d27; }
+html.dark [class~="bg-[#fbfcff]"] { background-color: #141b24; }
+html.dark [class~="bg-[#ffb13d]"] { background-color: #ffb13d; }
+html.dark [class~="bg-[#ffbd32]"] { background-color: #ffbd32; }
+html.dark [class~="bg-[#ffdce3]"] { background-color: #431a22; }
+html.dark [class~="bg-[#ffe6c4]"] { background-color: #584121; }
+html.dark [class~="bg-[#fff3e3]"] { background-color: #3d2d17; }
+html.dark [class~="bg-[#fff5f6]"] { background-color: #161e29; }
+html.dark [class~="border-[#c7ddf6]"] { border-color: #2e435a; }
+html.dark [class~="border-[#d7e8ff]"] { border-color: #1f3451; }
+html.dark [class~="border-[#d9e6f8]"] { border-color: #28374c; }
+html.dark [class~="border-[#e1ebf9]"] { border-color: #263346; }
+html.dark [class~="border-[#e8eff9]"] { border-color: #25303f; }
+html.dark [class~="border-[#eaecf0]"] { border-color: #32343a; }
+html.dark [class~="border-[#eaf1fb]"] { border-color: #212e3f; }
+html.dark [class~="border-[#f1d38b]"] { border-color: #f1d38b; }
+html.dark [class~="border-[#f3c6ce]"] { border-color: #5b3239; }
+html.dark [class~="text-[#0a8a94]"] { color: #76e6ef; }
+html.dark [class~="text-[#0f2a5c]"] { color: #c6d4ee; }
+html.dark [class~="text-[#0f3d8a]"] { color: #7ba5ea; }
+html.dark [class~="text-[#123b78]"] { color: #bbceeb; }
+html.dark [class~="text-[#123d7d]"] { color: #b9cdeb; }
+html.dark [class~="text-[#12563f]"] { color: #c9ede1; }
+html.dark [class~="text-[#14305c]"] { color: #c7d5eb; }
+html.dark [class~="text-[#14754d]"] { color: #bcebd7; }
+html.dark [class~="text-[#1554a4]"] { color: #7dace8; }
+html.dark [class~="text-[#1565c9]"] { color: #7bacea; }
+html.dark [class~="text-[#168357]"] { color: #81e4bc; }
+html.dark [class~="text-[#1765c4]"] { color: #7cade9; }
+html.dark [class~="text-[#234a80]"] { color: #8bacda; }
+html.dark [class~="text-[#24865b]"] { color: #8bdab7; }
+html.dark [class~="text-[#2877d7]"] { color: #83aee2; }
+html.dark [class~="text-[#2da16c]"] { color: #8cd9b6; }
+html.dark [class~="text-[#2fb36d]"] { color: #8adbb0; }
+html.dark [class~="text-[#3e8be8]"] { color: #7cade9; }
+html.dark [class~="text-[#526984]"] { color: #a2b1c3; }
+html.dark [class~="text-[#536c8e]"] { color: #a0b0c5; }
+html.dark [class~="text-[#5a37c0]"] { color: #a08cd9; }
+html.dark [class~="text-[#5d6f8c]"] { color: #a5afc0; }
+html.dark [class~="text-[#607794]"] { color: #a4b1c1; }
+html.dark [class~="text-[#6242c5]"] { color: #a08ed7; }
+html.dark [class~="text-[#637895]"] { color: #a5b0c0; }
+html.dark [class~="text-[#637b9a]"] { color: #a4b1c1; }
+html.dark [class~="text-[#648776]"] { color: #a8bdb3; }
+html.dark [class~="text-[#7055d1]"] { color: #9c8bda; }
+html.dark [class~="text-[#7962df]"] { color: #9685e0; }
+html.dark [class~="text-[#7c739c]"] { color: #aca7be; }
+html.dark [class~="text-[#8a9bb4]"] { color: #a3b0c2; }
+html.dark [class~="placeholder:text-[#8a9bb4]"]::placeholder { color: #a3b0c2; }
+html.dark [class~="text-[#8b7b67]"] { color: #bdb4a8; }
+html.dark [class~="text-[#a9c8f5]"] { color: #a9c8f5; }
+html.dark [class~="text-[#bcd5f7]"] { color: #bcd5f7; }
+html.dark [class~="text-[#c4dafa]"] { color: #c4dafa; }
+html.dark [class~="text-[#c76a0a]"] { color: #f1b374; }
+html.dark [class~="text-[#cf2d52]"] { color: #df869a; }
+html.dark [class~="text-[#d6455d]"] { color: #de8795; }
+html.dark [class~="text-[#e99127]"] { color: #ebb87a; }
+html.dark [class~="text-[#ffb13d]"] { color: #f7c06e; }
+html.dark [class~="from-[#e9f2ff]"] { --tw-gradient-from: #152438 var(--tw-gradient-from-position); --tw-gradient-to: rgb(21 36 56 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+html.dark [class~="from-[#eaf3ff]"] { --tw-gradient-from: #152437 var(--tw-gradient-from-position); --tw-gradient-to: rgb(21 36 55 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+html.dark [class~="from-[#edf5ff]"] { --tw-gradient-from: #142235 var(--tw-gradient-from-position); --tw-gradient-to: rgb(20 34 53 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+html.dark [class~="to-[#dcecff]"] { --tw-gradient-to: #1a2d43 var(--tw-gradient-to-position); }
+html.dark [class~="to-[#dfeafc]"] { --tw-gradient-to: #1d2a40 var(--tw-gradient-to-position); }
+html.dark [class~="to-[#ffffff]"] { --tw-gradient-to: #1e2836 var(--tw-gradient-to-position); }

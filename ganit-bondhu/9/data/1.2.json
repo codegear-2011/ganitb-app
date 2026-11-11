@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "classNo": 9,
+    "chapterNo": 1,
+    "chapterTitle": "বাস্তব সংখ্যা",
+    "exercise": "1.2"
+  },
+  "questions": [
+    {
+      "no": "1",
+      "svg": "",
+      "question": "নীচের বক্তব্যের কোনটি সত্য ও কোনটি মিথ্যা লিখি:\n(i) দুটি মূলদ সংখ্যার সমষ্টি সর্বদা মূলদ সংখ্যা হবে।\n(ii) দুটি অমূলদ সংখ্যার সমষ্টি সর্বদা অমূলদ সংখ্যা হবে।\n(iii) দুটি মূলদ সংখ্যার গুণফল সর্বদা মূলদ সংখ্যা হবে।\n(iv) দুটি অমূলদ সংখ্যার গুণফল সর্বদা মূলদ সংখ্যা হবে।\n(v) প্রতিটি মূলদ সংখ্যাই বাস্তব সংখ্যা।\n(vi) প্রতিটি বাস্তব সংখ্যাই অমূলদ সংখ্যা।",
+      "solution": [
+        "**(i)** উত্তর: **সত্য (True)**",
+        "কারণ মূলদ সংখ্যার সেট যোগের সাপেক্ষে আবদ্ধ।",
+        "**(ii)** উত্তর: **মিথ্যা (False)**",
+        "কারণ দুটি অমূলদ সংখ্যার সমষ্টি মূলদও হতে পারে। যেমন: $\\sqrt{3}$ এবং $-\\sqrt{3}$ দুটি অমূলদ সংখ্যা, কিন্তু এদের সমষ্টি $\\sqrt{3} + (-\\sqrt{3}) = 0$, যা একটি মূলদ সংখ্যা।",
+        "**(iii)** উত্তর: **সত্য (True)**",
+        "**(iv)** উত্তর: **মিথ্যা (False)**",
+        "দুটি অমূলদ সংখ্যার গুণফল মূলদ বা অমূলদ দুটিই হতে পারে। যেমন: $\\sqrt{2} \\times \\sqrt{2} = 2$ (মূলদ), আবার $\\sqrt{2} \\times \\sqrt{3} = \\sqrt{6}$ (অমূলদ)। সর্বদা মূলদ হয় না।",
+        "**(v)** উত্তর: **সত্য (True)**",
+        "কারণ বাস্তব সংখ্যার সেটের মধ্যেই সমস্ত মূলদ ও অমূলদ সংখ্যা অন্তর্ভুক্ত থাকে।",
+        "**(vi)** উত্তর: **মিথ্যা (False)**",
+        "কারণ বাস্তব সংখ্যা মানে মূলদ ও অমূলদ উভয়ের সংমিশ্রণ। যেমন: $2$ একটি বাস্তব সংখ্যা, কিন্তু এটি অমূলদ নয়, এটি মূলদ।"
+      ]
+    },
+    {
+      "no": "2",
+      "svg": "",
+      "question": "অমূলদ সংখ্যা বলতে কী বুঝি? 4 টি অমূলদ সংখ্যা লিখি।",
+      "solution": [
+        "**অমূলদ সংখ্যা (Irrational Number):** যে সকল সংখ্যাকে $\\frac{p}{q}$ আকারে প্রকাশ করা যায় না, যেখানে $p$ এবং $q$ দুটি পূর্ণসংখ্যা এবং $q \\neq 0$, তাদের অমূলদ সংখ্যা বলা হয়।",
+        "অন্যভাবে বলা যায়, যে সংখ্যার দশমিক বিস্তার অসীম ও অনাবৃত্ত (non-terminating and non-recurring), তাকে অমূলদ সংখ্যা বলে।",
+        "৪ টি অমূলদ সংখ্যার উদাহরণ হলো:",
+        "$$\\sqrt{2},\\ \\sqrt{3},\\ \\sqrt{5},\\ \\pi\\ \\text{অথবা}\\ 0.1010010001\\dots$$"
+      ]
+    },
+    {
+      "no": "3",
+      "svg": "",
+      "question": "নীচের সংখ্যাগুলির মধ্যে কোনটি মূলদ সংখ্যা এবং কোনটি অমূলদ সংখ্যা লিখি:\n(i) $\\sqrt{9}$ (ii) $\\sqrt{225}$ (iii) $\\sqrt{7}$ (iv) $\\sqrt{50}$ (v) $\\sqrt{100}$\n(vi) $-\\sqrt{81}$ (vii) $\\sqrt{42}$ (viii) $\\sqrt{29}$ (ix) $-\\sqrt{1000}$",
+      "solution": [
+        "**(i)** $\\sqrt{9} = 3$ $\\rightarrow$ **মূলদ সংখ্যা**",
+        "**(ii)** $\\sqrt{225} = 15$ $\\rightarrow$ **মূলদ সংখ্যা**",
+        "**(iii)** $\\sqrt{7}$ $\\rightarrow$ **অমূলদ সংখ্যা** (কারণ 7 পূর্ণবর্গ নয়)",
+        "**(iv)** $\\sqrt{50} = \\sqrt{25 \\times 2} = 5\\sqrt{2}$ $\\rightarrow$ **অমূলদ সংখ্যা**",
+        "**(v)** $\\sqrt{100} = 10$ $\\rightarrow$ **মূলদ সংখ্যা**",
+        "**(vi)** $-\\sqrt{81} = -9$ $\\rightarrow$ **মূলদ সংখ্যা**",
+        "**(vii)** $\\sqrt{42}$ $\\rightarrow$ **অমূলদ সংখ্যা**",
+        "**(viii)** $\\sqrt{29}$ $\\rightarrow$ **অমূলদ সংখ্যা**",
+        "**(ix)** $-\\sqrt{1000} = -\\sqrt{100 \\times 10} = -10\\sqrt{10}$ $\\rightarrow$ **অমূলদ সংখ্যা**"
+      ]
+    },
+    {
+      "no": "4",
+      "svg": "<svg viewBox='0 0 500 220' width='100%' style='max-width:500px;background:#fff;border:1px solid #eaecf0;border-radius:8px'><defs><marker id='a4' viewBox='0 0 10 10' refX='5' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#334155'/></marker></defs><line x1='40' y1='160' x2='460' y2='160' stroke='#334155' stroke-width='2' marker-end='url(#a4)' marker-start='url(#a4)'/><line x1='100' y1='155' x2='100' y2='165' stroke='#64748b' stroke-width='2'/><text x='100' y='185' font-size='14' fill='#64748b' text-anchor='middle'>-1</text><line x1='200' y1='155' x2='200' y2='165' stroke='#64748b' stroke-width='2'/><text x='200' y='185' font-size='14' fill='#64748b' text-anchor='middle'>0 (O)</text><line x1='300' y1='155' x2='300' y2='165' stroke='#64748b' stroke-width='2'/><text x='300' y='185' font-size='14' fill='#64748b' text-anchor='middle'>1</text><line x1='400' y1='155' x2='400' y2='165' stroke='#64748b' stroke-width='2'/><text x='400' y='185' font-size='14' fill='#64748b' text-anchor='middle'>2 (A)</text><line x1='200' y1='160' x2='400' y2='160' stroke='#0284c7' stroke-width='2.5'/><line x1='400' y1='160' x2='400' y2='60' stroke='#0284c7' stroke-width='2.5'/><line x1='200' y1='160' x2='400' y2='60' stroke='#0284c7' stroke-width='2.5'/><text x='300' y='150' font-size='14' fill='#0284c7' font-weight='bold' text-anchor='middle'>2 একক</text><text x='410' y='115' font-size='14' fill='#0284c7' font-weight='bold'>1 একক</text><text x='280' y='95' font-size='15' fill='#0284c7' font-weight='bold'>√5</text><text x='400' y='45' font-size='15' fill='#334155' font-weight='bold' text-anchor='middle'>B</text><polyline points='385,160 385,145 400,145' fill='none' stroke='#334155' stroke-width='1.5'/><path d='M 400 60 A 223.6 223.6 0 0 1 423.6 160' fill='none' stroke='#e11d48' stroke-width='2' stroke-dasharray='6,4'/><circle cx='423.6' cy='160' r='4.5' fill='#e11d48'/><text x='423.6' y='190' font-size='15' fill='#e11d48' font-weight='bold' text-anchor='middle'>P (√5)</text></svg>",
+      "question": "সংখ্যারেখায় $\\sqrt{5}$ স্থাপন করি।",
+      "solution": [
+        "**অঙ্কন পদ্ধতি :**",
+        "১) সংখ্যারেখার O বিন্দুতে 0 স্থাপন করলাম। ডানদিকে A বিন্দু নিলাম যাতে $OA = 2$ একক হয়।",
+        "২) A বিন্দুতে $OA$-এর উপর লম্ব $AB$ আঁকলাম এবং $AB = 1$ একক নিলাম।",
+        "৩) সমকোণী ত্রিভুজ $\\triangle OAB$-এ পিথাগোরাসের উপপাদ্য থেকে পাই,",
+        "$$OB = \\sqrt{OA^2 + AB^2} = \\sqrt{2^2 + 1^2} = \\sqrt{5}\\ \\text{একক}$$",
+        "৪) O বিন্দুকে কেন্দ্র করে $OB$-এর সমান ব্যাসার্ধ নিয়ে বৃত্তচাপ আঁকলাম, যা সংখ্যারেখাকে P বিন্দুতে ছেদ করল। অর্থাৎ $OP = \\sqrt{5}$ একক।",
+        "**অতএব, সংখ্যারেখায় $\\sqrt{5}$ স্থাপন করে P বিন্দু পেলাম।**"
+      ]
+    },
+    {
+      "no": "5",
+      "svg": "<svg viewBox='0 0 500 250' width='100%' style='max-width:500px;background:#fff;border:1px solid #eaecf0;border-radius:8px'><defs><marker id='a5' viewBox='0 0 10 10' refX='5' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M0 0L10 5L0 10z' fill='#334155'/></marker></defs><line x1='40' y1='200' x2='460' y2='200' stroke='#334155' stroke-width='2' marker-end='url(#a5)' marker-start='url(#a5)'/><line x1='100' y1='195' x2='100' y2='205' stroke='#64748b' stroke-width='2'/><text x='100' y='225' font-size='14' fill='#64748b' text-anchor='middle'>-1</text><line x1='200' y1='195' x2='200' y2='205' stroke='#64748b' stroke-width='2'/><text x='200' y='225' font-size='14' fill='#64748b' text-anchor='middle'>0 (O)</text><line x1='300' y1='195' x2='300' y2='205' stroke='#64748b' stroke-width='2'/><text x='300' y='225' font-size='14' fill='#64748b' text-anchor='middle'>1 (A)</text><line x1='400' y1='195' x2='400' y2='205' stroke='#64748b' stroke-width='2'/><text x='400' y='225' font-size='14' fill='#64748b' text-anchor='middle'>2</text><line x1='200' y1='200' x2='300' y2='200' stroke='#0284c7' stroke-width='2'/><line x1='300' y1='200' x2='300' y2='100' stroke='#0284c7' stroke-width='2'/><line x1='200' y1='200' x2='300' y2='100' stroke='#0284c7' stroke-width='2'/><text x='250' y='190' font-size='12' fill='#0284c7' font-weight='bold' text-anchor='middle'>1</text><text x='310' y='155' font-size='12' fill='#0284c7' font-weight='bold'>1</text><text x='260' y='135' font-size='13' fill='#0284c7' font-weight='bold' transform='rotate(-45 260,135)'>√2</text><text x='300' y='85' font-size='15' fill='#334155' font-weight='bold' text-anchor='middle'>B</text><polyline points='285,200 285,185 300,185' fill='none' stroke='#334155' stroke-width='1.5'/><line x1='300' y1='100' x2='229.3' y2='29.3' stroke='#16a34a' stroke-width='2.5'/><line x1='200' y1='200' x2='229.3' y2='29.3' stroke='#16a34a' stroke-width='2.5'/><text x='275' y='55' font-size='13' fill='#16a34a' font-weight='bold'>1</text><text x='195' y='115' font-size='14' fill='#16a34a' font-weight='bold'>√3</text><text x='229.3' y='15' font-size='15' fill='#334155' font-weight='bold' text-anchor='middle'>C</text><polyline points='289,89 278,100 289,111' fill='none' stroke='#334155' stroke-width='1.5'/><path d='M 229.3 29.3 A 173.2 173.2 0 0 1 373.2 200' fill='none' stroke='#e11d48' stroke-width='2' stroke-dasharray='6,4'/><circle cx='373.2' cy='200' r='4.5' fill='#e11d48'/><text x='373.2' y='230' font-size='15' fill='#e11d48' font-weight='bold' text-anchor='middle'>Q (√3)</text></svg>",
+      "question": "সংখ্যারেখায় $\\sqrt{3}$ স্থাপন করি।",
+      "solution": [
+        "**অঙ্কন পদ্ধতি :**",
+        "১) প্রথমে $\\sqrt{2}$ বের করব। O থেকে ডানদিকে $OA = 1$ একক নিলাম।",
+        "২) A বিন্দুতে লম্ব $AB = 1$ একক নিলাম। তাহলে $OB = \\sqrt{1^2 + 1^2} = \\sqrt{2}$ একক।",
+        "৩) B বিন্দুতে $OB$-এর উপর লম্ব $BC$ আঁকলাম এবং $BC = 1$ একক নিলাম।",
+        "৪) সমকোণী ত্রিভুজ $\\triangle OBC$-এ,",
+        "$$OC = \\sqrt{OB^2 + BC^2} = \\sqrt{(\\sqrt{2})^2 + 1^2} = \\sqrt{3}\\ \\text{একক}$$",
+        "৫) O কে কেন্দ্র করে $OC$-এর সমান ব্যাসার্ধ নিয়ে বৃত্তচাপ আঁকলাম, যা সংখ্যারেখাকে Q বিন্দুতে ছেদ করল। অর্থাৎ $OQ = \\sqrt{3}$ একক।",
+        "**অতএব, সংখ্যারেখায় $\\sqrt{3}$ স্থাপন করে Q বিন্দু পেলাম।**"
+      ]
+    },
+    {
+      "no": "6",
+      "svg": "",
+      "question": "একই সংখ্যারেখায় $\\sqrt{5}, \\sqrt{6}, \\sqrt{7}, -\\sqrt{6}, -\\sqrt{8}, -\\sqrt{11}$ স্থাপন করি।",
+      "solution": [
+        "**ধনাত্মক দিক :**",
+        "$\\sqrt{5}$ : O(0) থেকে 2 একক গিয়ে তার উপর 1 একক লম্ব টানলে অতিভুজ $\\sqrt{5}$ হবে।",
+        "$\\sqrt{6}$ : $\\sqrt{5}$-এর অতিভুজের উপর 1 একক লম্ব টানলে নতুন অতিভুজ $\\sqrt{6}$ হবে।",
+        "$\\sqrt{7}$ : $\\sqrt{6}$-এর অতিভুজের উপর 1 একক লম্ব টানলে নতুন অতিভুজ $\\sqrt{7}$ হবে।",
+        "**ঋণাত্মক দিক :**",
+        "$-\\sqrt{6}$ : ডানদিকের $\\sqrt{6}$-এর সমান ব্যাসার্ধ নিয়ে O কে কেন্দ্র করে বাঁদিকে বৃত্তচাপ কাটলেই $-\\sqrt{6}$ পাওয়া যাবে।",
+        "$-\\sqrt{8}$ : O থেকে বাঁদিকে 2 একক গিয়ে ($-2$-তে) 2 একক লম্ব টানলে অতিভুজ $= \\sqrt{2^2 + 2^2} = \\sqrt{8}$ হবে। বাঁদিকে ছেদ করলে $-\\sqrt{8}$ পাব।",
+        "$-\\sqrt{11}$ : O থেকে বাঁদিকে 3 একক গিয়ে ($-3$-তে) $\\sqrt{2}$ একক লম্ব টানলে অতিভুজ $= \\sqrt{3^2 + (\\sqrt{2})^2} = \\sqrt{11}$ হবে। বাঁদিকে ছেদ করলে $-\\sqrt{11}$ পাব।",
+        "**টিপস :** পিথাগোরাসের উপপাদ্য (লম্ব$^2$ + ভূমি$^2$ = অতিভুজ$^2$) ব্যবহার করে যেকোনো অমূলদ সংখ্যাকে সংখ্যারেখায় স্থাপন করা যায়।"
+      ]
+    }
+  ]
+}
