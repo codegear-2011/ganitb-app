@@ -227,7 +227,7 @@
   // href: null মানে পেজ এখনো নেই — চাপলে "শীঘ্রই আসছে" বার্তা আসে।
   // পেজ বানানো হলে শুধু href-এ ফাইলের নাম বসান (যেমন 'calculator.html')।
   var NAV_ITEMS = [
-    { id: 'home',     icon: 'fa-house',      label: 'হোম',          href: 'index.html' },
+    { id: 'home',     icon: 'fa-house',      label: 'হোম',          href: 'home.html' },
     { id: 'practice', icon: 'fa-file-pen',   label: 'অনুশীলনী',     href: null },
     { id: 'calc',     icon: 'fa-calculator', label: 'ক্যালকুলেটর',  href: null },
     { id: 'settings', icon: 'fa-gear',       label: 'সেটিংস',        href: 'settings.html' }
